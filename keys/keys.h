@@ -8,8 +8,8 @@
 #include <netdb.h>
 #include <errno.h>
 
-#define SERVER_PORT_ENV "PORT_TUPLAS"
-#define SERVER_ADDRESS_ENV "IP_TUPLAS"
+#define SERVER_PORT_ENV "PORT_TUPLES"
+#define SERVER_ADDRESS_ENV "IP_TUPLES"
 
 
 /*
