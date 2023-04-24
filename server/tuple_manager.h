@@ -20,11 +20,11 @@ struct node {
 
 
 void empty_list();
-// Devuelve 0 en éxito y -1 en error
+// Returns 0 on success & -1 on error
 char insert_tuple(int clave, char * v1, int v2, double v3);
-// Devuelve tupla en éxito y NULL en error
+// Returns tuple on success and NULL on error
 struct node * find_tuple(int clave);
-// Devuelve 0 en éxito y -1 en error
+// Returns 0 on success & -1 on error
 char delete_tuple(int clave);
 
 #endif //SOCKETS_TUPLE_MANAGER_H

@@ -33,13 +33,11 @@ void init(int client) {
 void setValue(message msg, int client) {
     message ret;
     ret.op = 0;
-    //printf("setValue:\n\t");
 
     pthread_mutex_lock(&single_list_lock);
     if(insert_tuple(msg.key, msg.value1, msg.value2, msg.value3)) { ret.op = -1;}
     pthread_mutex_unlock(&single_list_lock);
 
-    //displayTuple(msg);
     send_response(ret, client, SET_VALUE_CODE);
 }
 
@@ -59,7 +57,6 @@ void getValue(message msg, int client) {
     }
     pthread_mutex_unlock(&single_list_lock);
 
-    //displayTuple(ret);
     send_response(ret, client, GET_VALUE_CODE);
 }
 
@@ -78,14 +75,12 @@ void modifyValue(message msg, int client) {
     }
     pthread_mutex_unlock(&single_list_lock);
 
-    //displayTuple(msg);
     send_response(ret, client, MODIFY_VALUE_CODE);
 }
 
 void deleteKey(message msg, int client) {
     message ret;
     ret.op = 0;
-    //printf("deleteKey: with key = %d\n\t", msg.key);
     msg.value3 = 0;
     msg.value2 = 0;
     strcpy(msg.value1, "");
@@ -94,14 +89,12 @@ void deleteKey(message msg, int client) {
     ret.op = delete_tuple(msg.key);
     pthread_mutex_unlock(&single_list_lock);
 
-    //displayTuple(msg);
     send_response(ret, client, DELETE_KEY_CODE);
 }
 
 void exist(message msg, int client) {
     message ret;
     ret.op = 0;
-    //printf("exist: with key = %d\n", msg.key);
 
     pthread_mutex_lock(&single_list_lock);
     struct node *tp = find_tuple(msg.key);
@@ -110,17 +103,14 @@ void exist(message msg, int client) {
     }
     pthread_mutex_unlock(&single_list_lock);
 
-    //displayTuple(msg);
     send_response(ret, client, EXIST_CODE);
 }
 
 void copyKey(message msg, int client) {
     message ret;
     ret.op = 0;
-    //printf("copyKey: key1 = %d, key2 = %d\n\t", msg.key, msg.value2);
     msg.value3 = 0;
     strcpy(msg.value1, "");
-
 
     pthread_mutex_lock(&single_list_lock);
 
@@ -146,7 +136,6 @@ void copyKey(message msg, int client) {
     }
     pthread_mutex_unlock(&single_list_lock);
 
-    //displayTuple(msg);
     send_response(ret, client, COPY_KEY_CODE);
 }
 
@@ -165,7 +154,6 @@ void * execute_operation(const int * sock_des) {
     if(receive_request(&msg, client_descriptor)){
         fprintf(stderr, "Error receiving operation message");
     } else {
-        //printf("Check proper msg passing: \n\t msg.op_code == %d, msg.key == %d\n", msg.op, msg.key);
         switch (msg.op) {
             case INIT_CODE:
                 init(client_descriptor);
@@ -290,7 +278,6 @@ int main(int argc, char ** argv) {
 
     initiate_service(port_number);
 
-    // Prepare for exit
     pthread_mutex_destroy(&single_list_lock);
 
     return 0;
