@@ -15,7 +15,7 @@ int main() {
     printf("init(): %d\n", init());
 
     printf("set_value(0, \"ASDF\", 78001, 2.0f): %d <must be 0>\n", set_value(0, "ASDF", 78001, 2.0f));
-    printf("exist(0): %d <debe salir 1>\n", exist(0));
+    printf("exist(0): %d <must be 1>\n", exist(0));
     printf("set_value(0, \"ASDF\", 1, 2.0f): %d <now it must be -1>\n", set_value(0, "ASDF", 1, 2.0f));
 
     int g = get_value(0, gv1, &gv2, &gv3);
